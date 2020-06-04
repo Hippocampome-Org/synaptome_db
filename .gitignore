@@ -1,6 +1,4 @@
 data/Synaptic.ePhys.Data/*
 data/renamed/*
-db_addr.txt
-db_name.txt
 db_user.txt
 db_pass.txt

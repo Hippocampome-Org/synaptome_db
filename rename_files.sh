@@ -4,7 +4,7 @@
 #
 ####################################
 
-FILES_LOCATION=/comp_neuro/PhD/gmu/research/synaptome/data/renamed/
+FILES_LOCATION=data/renamed/
 
 COND1=Vh=-60_P0_ISI50_T22_Th350_Female_P14_Mice_Cli=4_gluconatei=0
 COND2=Vh=-60_P0_ISI50_T22_Th350_Female_P14_Rat_Cli=4_gluconatei=0
