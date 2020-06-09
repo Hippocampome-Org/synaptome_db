@@ -20,6 +20,11 @@ do
     mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u $USER -p$PASS $DB $CSV_DIR/$FILE > /dev/null 2>&1	
 done
 echo "Imported data to initial tables"
+
+mysql -h $ADDR -u $USER -p$PASS $DB < create_synprotypetyperel.sql > /dev/null 2>&1 &&
+mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u $USER -p$PASS $DB ./data/synprotypetyperel.csv > /dev/null 2>&1 &&
+echo "Imported data to typetyperel table"
+
 echo "Now building final tables"
 
 mysql -h $ADDR -u $USER -p$PASS $DB < create_tm_tables.sql && 
