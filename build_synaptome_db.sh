@@ -25,6 +25,10 @@ mysql -h $ADDR -u $USER -p$PASS $DB < create_synprotypetyperel.sql > /dev/null 2
 mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u $USER -p$PASS $DB ./data/synprotypetyperel.csv > /dev/null 2>&1 &&
 echo "Imported data to typetyperel table"
 
+mysql -h $ADDR -u $USER -p$PASS $DB < create_conditions.sql > /dev/null 2>&1 &&
+mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u $USER -p$PASS $DB ./data/conditions.csv > /dev/null 2>&1 &&
+echo "Imported data to conditions table"
+
 echo "Now building final tables"
 
 mysql -h $ADDR -u $USER -p$PASS $DB < create_tm_tables.sql && 
