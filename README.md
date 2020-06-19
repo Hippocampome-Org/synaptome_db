@@ -19,7 +19,7 @@ ADDR=localhost # db address
 DB=synaptome   # db name
 variables if needed
 
-* Create db_pass.txt and db_pass.txt files that contains your database access login.
+* Create db_user.txt and db_pass.txt files that contains your database access login.
 Only put a single piece of text that is your user or pass in each file.
 
 * Run:
