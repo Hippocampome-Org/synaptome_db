@@ -31,3 +31,8 @@ A lot of the processing time is automating queries to
 transfer the values from the original 160 files and corresponding
 tables into a table for each condition, amounting to 32
 tables in total.
+
+Note: the build_synaptome_db.sh script will delete the 1st column in csv files in
+the $CSV_DIR folder and add a new 1st column that has ID column numbers starting at
+1. An issue was found with importing the original files into the database because
+of their IDs starting at 0 and this fixes that issue.

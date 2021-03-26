@@ -15,11 +15,20 @@ echo "Creating intial tables"
 mysql -h $ADDR -u $USER -p$PASS $DB < create_synaptome.sql &&
 mysql -h $ADDR -u $USER -p$PASS $DB < create_tables.sql &&
 
+cd $CSV_DIR;
+
 for FILE in *.csv
 do
-    mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u $USER -p$PASS $DB $CSV_DIR/$FILE > /dev/null 2>&1	
+	# fix 1st column id numbering
+	cut -d, -f 2,3,4,5,6,7,8 $FILE > $FILE.trim && # trim out 1st column
+	awk '{printf "%s,%s\n", NR==1 ? "ID" : NR-1, $0}' $FILE.trim > $FILE && # add correct id numbers
+	rm $FILE.trim && # remove temp file
+	# import file to MySql
+    mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u $USER -p$PASS $DB $FILE > /dev/null 2>&1	
 done
 echo "Imported data to initial tables"
+
+cd ../..
 
 mysql -h $ADDR -u $USER -p$PASS $DB < create_synprotypetyperel.sql > /dev/null 2>&1 &&
 mysqlimport --ignore-lines=1 --fields-terminated-by=, --verbose --local -u $USER -p$PASS $DB ./data/synprotypetyperel.csv > /dev/null 2>&1 &&
